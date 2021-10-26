@@ -11,7 +11,7 @@ module.exports = function(app, passport, db) {
     });
 
     
-    app.get('/admin', function(req, res) {
+    app.get('/admin', isLoggedIn, function(req, res) {
       ContactForm.find().exec((err, result) => { //after finding all contactforms, find this function
         if (err) return console.log(err)
         res.render('admin.ejs', {
@@ -36,6 +36,7 @@ module.exports = function(app, passport, db) {
     app.get('/profile', isLoggedIn, function(req, res) {
   });
 
+    
 
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
@@ -60,6 +61,13 @@ module.exports = function(app, passport, db) {
           res.redirect('/')
       })
     })
+
+      app.put('/custContacted', function(req, res){
+      console.log(req.body) 
+      //find the object to update, update the property, then send the updated version back to the db
+      res.send(result)
+    });
+
 
     app.put('/rate', function(req, res){
       console.log(req.body)
@@ -129,8 +137,8 @@ module.exports = function(app, passport, db) {
 
         // process the login form
         app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/profile', // redirect to the secure profile section
-            failureRedirect : '/login', // redirect back to the signup page if there is an error
+            successRedirect : '/admin',
+            failureRedirect : '/login',
             failureFlash : true // allow flash messages
         }));
 
@@ -171,5 +179,5 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
 
-    res.redirect('/profile');
+    res.redirect('/login');
 }

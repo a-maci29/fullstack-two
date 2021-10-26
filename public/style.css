@@ -16,6 +16,7 @@ img{
   background-color: white;
   height: 100%;
   color: #175e85;
+  float: left;
 }
 
 #photo {
@@ -38,3 +39,15 @@ h2 {
   letter-spacing: .1em;
 }
 
+nav {
+  width: 70%;
+  height: 100%;
+  background-color: coral;
+}
+
+#bio {
+  height: 400px;
+  width: 70%;
+  float: right;
+  background-color: pink;
+}
