@@ -1,7 +1,47 @@
 body{
-  padding-top:80px;
   word-wrap:break-word;
+  box-sizing: border-box;
+  background-color: #5ec4ff
 }
 img{
   height: 200px;
+}
+#intro {
+  position: absolute;
+  left: 0;
+  overflow:hidden;
+  text-align: center;
+  width: 30%;
+  padding: 3em;
+  background-color: white;
+  height: 100%;
+  color: #175e85;
+}
+
+#photo {
+  height: 12em;
+  width: 12em;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: #175e85;
+  color: white;
+}
+
+h1 {
+  font-family: 'Patua One', cursive;
+  font-size: 7em;
+}
+
+h2 {
+  font-family: 'Abel', sans-serif;
+  margin: 1em;
+  letter-spacing: .1em;
+}
+
+#nav {
+  position: absolute;
+  background-color: violet;
+  height: 6em;
+  right: 0;
+  width: 70%;
 }

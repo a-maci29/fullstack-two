@@ -61,6 +61,17 @@ module.exports = function(app, passport, db) {
       })
     })
 
+    app.put('/rate', function(req, res){
+      console.log(req.body)
+
+      res.redirect('/about')
+
+
+    });
+
+    
+    
+    
     app.put('/customerInquiry', (req, res) => {
       db.collection('customerInquiry')
       .findOneAndUpdate({

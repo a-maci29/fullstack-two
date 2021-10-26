@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>SECOND SITE</title>
+
+    
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
@@ -10,7 +12,8 @@
 <div class="container">
 
     <div class="jumbotron text-center">
-        <div id="intro">
+
+        <div id="leftSection">
         <h1>Daniel Cha</h1>
         <h2>graphic design, branding, motion graphics</h2>
         </div>
@@ -24,6 +27,22 @@
             </ul>
         </div>
 
+            <form action="/rate" method="PUT" id="ratingForm">
+                <label>Name</label>
+                <input type="text" class="endorseName" name="name">
+                <label>Email</label>
+                <input type="text" class="endorseEmail" name="email">
+                <label>rating</label>
+                <select class="rating" name="rating">Select Rating
+                    <option value="1">one</option>
+                    <option value="2">two</option>
+                    <option value="3">three</option>
+                    <option value="4">four</option>
+                    <option value="5">five</option>    
+                <select>
+                    <button type="button" id="submitRating">Add rating</button>
+            </form>
+
 
         <p id="bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quasi quae quos iste. Quia at, dolorem saepe magnam aliquid obcaecati velit optio. Nesciunt necessitatibus illo laborum libero cumque omnis debitis?</p>
         <button class="admin" href="/admin">Admin Login</button>
@@ -36,5 +55,6 @@
     </div>
 
 </div>
+<script src="main.js"></script>
 </body>
 </html>
