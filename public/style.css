@@ -38,10 +38,3 @@ h2 {
   letter-spacing: .1em;
 }
 
-#nav {
-  position: absolute;
-  background-color: violet;
-  height: 6em;
-  right: 0;
-  width: 70%;
-}

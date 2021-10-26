@@ -43,7 +43,7 @@ module.exports = function(app, passport, db) {
         res.redirect('/');
     });
 
-// message board routes ===============================================================
+// message board routes =============================================================== ツ
  
     app.post('/inquiries', (req, res) => {
         const newForm = new ContactForm({
@@ -63,14 +63,8 @@ module.exports = function(app, passport, db) {
 
     app.put('/rate', function(req, res){
       console.log(req.body)
-
       res.redirect('/about')
-
-
     });
-
-    
-    
     
     app.put('/customerInquiry', (req, res) => {
       db.collection('customerInquiry')
@@ -90,10 +84,35 @@ module.exports = function(app, passport, db) {
       })
     })
 
-    app.delete('/messages', (req, res) => {
-      db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
+    app.put('/rate', (req, res) => {
+      db.collection('rate')
+      .findOneAndUpdate({
+        name: req.body.name,
+        email: req.body.email,
+        rating: req.body.rating}, {
+        $set: {
+          
+        }
+      }, {
+        sort: {_id: -1},
+        upsert: true
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
+      })
+    })
+
+    app.delete('/customerInquiry', (req, res) => {
+      db.collection('customerInquiry').findOneAndDelete({name: req.body.name, email: req.body.email, msg: req.body.msg}, (err, result) => {
         if (err) return res.send(500, err)
-        res.send('Message deleted!')
+        res.send('Customer Contacted!')
+      })
+    })
+
+    app.delete('/rate', (req, res) => {
+      db.collection('rate').findOneAndDelete({name: req.body.name, email: req.body.email, rating: req.body.rating}, (err, result) => {
+        if (err) return res.send(500, err)
+        res.send('Rating deleted')
       })
     })
 
