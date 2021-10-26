@@ -66,24 +66,20 @@ module.exports = function(app, passport, db) {
       res.redirect('/about')
     });
     
-    app.put('/customerInquiry', (req, res) => {
-      db.collection('customerInquiry')
+
+
+    app.post('/rate', (req, res) => {
+      db.collection('rate')
       .findOneAndUpdate({
         name: req.body.name,
         email: req.body.email,
-        msg: req.body.msg}, {
+        rating: req.body.rating}, {
         $set: {
           
         }
-      }, {
-        sort: {_id: -1},
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-    })
-
+        
+      });
+    });
     app.put('/rate', (req, res) => {
       db.collection('rate')
       .findOneAndUpdate({
@@ -100,7 +96,9 @@ module.exports = function(app, passport, db) {
         if (err) return res.send(err)
         res.send(result)
       })
-    })
+
+      
+    });
 
     app.delete('/customerInquiry', (req, res) => {
       db.collection('customerInquiry').findOneAndDelete({name: req.body.name, email: req.body.email, msg: req.body.msg}, (err, result) => {
@@ -114,13 +112,13 @@ module.exports = function(app, passport, db) {
         if (err) return res.send(500, err)
         res.send('Rating deleted')
       })
-    })
+    });
 
     
 
-// =============================================================================
-// AUTHENTICATE (FIRST LOGIN) ==================================================
-// =============================================================================
+        // =============================================================================
+        // AUTHENTICATE (FIRST LOGIN) ==================================================
+        // =============================================================================
 
     // locally --------------------------------
         // LOGIN ===============================
@@ -149,12 +147,12 @@ module.exports = function(app, passport, db) {
             failureFlash : true // allow flash messages
         }));
 
-// =============================================================================
-// UNLINK ACCOUNTS =============================================================
-// =============================================================================
-// used to unlink accounts. for social accounts, just remove the token
-// for local account, remove email and password
-// user account will stay active in case they want to reconnect in the future
+    // =============================================================================
+    // UNLINK ACCOUNTS =============================================================
+    // =============================================================================
+    // used to unlink accounts. for social accounts, just remove the token
+    // for local account, remove email and password
+    // user account will stay active in case they want to reconnect in the future
 
     // local -----------------------------------
     app.get('/unlink/local', isLoggedIn, function(req, res) {
@@ -165,7 +163,7 @@ module.exports = function(app, passport, db) {
             res.redirect('/profile');
         });
     });
-
+    
 };
 
 // route middleware to ensure user is logged in
