@@ -1,25 +1,22 @@
 
-var ContactForm       		= require('../app/models/contactform'); //all imports should be at the top of the document
-module.exports = function(app, passport, db) {
-
-
 // normal routes ===============================================================
-
+module.exports = function (app, passport, db) {
     // show the home page (will also have our login links)
-    app.get('/about', function(req, res) {
-        res.render('about.ejs');
-    });
+   
 
-    
-    app.get('/admin', isLoggedIn, function(req, res) {
-      ContactForm.find().exec((err, result) => { //after finding all contactforms, find this function
-        if (err) return console.log(err)
-        res.render('admin.ejs', {
-          user : req.user,
-          messages: result
-        })
+  app.get('/admin',isLoggedIn,   function (req, res) {
+    db.collection('contactforms').find().toArray((err, result) => {
+      if (err) return console.log(err)
+      res.render('admin.ejs', {
+        user: req.user,
+        messages: result
       })
+    })
   });
+  
+  app.get('/about', function(req, res) {
+    res.render('about.ejs');
+});
 
     app.get('/contact', function(req, res) {
       res.render('contact.ejs');
@@ -33,9 +30,7 @@ module.exports = function(app, passport, db) {
       res.render('index.ejs');
     }); 
 
-    app.get('/profile', isLoggedIn, function(req, res) {
-  });
-
+ 
     
 
     // LOGOUT ==============================
@@ -46,56 +41,29 @@ module.exports = function(app, passport, db) {
 
 // message board routes =============================================================== ツ
  
+// Post
     app.post('/inquiries', (req, res) => {
-        const newForm = new ContactForm({
-          name: req.body.name,
-          email: req.body.email,
-          msg: req.body.msg
-         }) //this section is creating a new doc. call newform.save to run it
-          newForm.save(
-          (err, result) => {
-          //console.log('/inquiries is being hit')
-     
-          if (err) return console.log(err)
-          console.log('saved to database')
-          res.redirect('/')
+      db.collection('contactforms').insertOne({  
+        name: req.body.name,
+        email: req.body.email,
+        msg: req.body.msg,
+        contacted: false
+      }, (err, result) => {
+        if (err) return console.log(err)
+        console.log('saved to database')
+        res.redirect('/')
       })
+  
     })
-
-      app.put('/custContacted', function(req, res){
-      console.log(req.body) 
-      //find the object to update, update the property, then send the updated version back to the db
-      res.send(result)
-    });
-
-
-    app.put('/rate', function(req, res){
-      console.log(req.body)
-      res.redirect('/about')
-    });
-    
-
-
-    app.post('/rate', (req, res) => {
-      db.collection('rate')
+//  update method
+    app.put('/update', (req, res) => {
+      db.collection('contactforms')
       .findOneAndUpdate({
         name: req.body.name,
         email: req.body.email,
-        rating: req.body.rating}, {
+        msg: req.body.msg}, {
         $set: {
-          
-        }
-        
-      });
-    });
-    app.put('/rate', (req, res) => {
-      db.collection('rate')
-      .findOneAndUpdate({
-        name: req.body.name,
-        email: req.body.email,
-        rating: req.body.rating}, {
-        $set: {
-          
+          contacted:true
         }
       }, {
         sort: {_id: -1},
@@ -108,19 +76,15 @@ module.exports = function(app, passport, db) {
       
     });
 
-    app.delete('/customerInquiry', (req, res) => {
-      db.collection('customerInquiry').findOneAndDelete({name: req.body.name, email: req.body.email, msg: req.body.msg}, (err, result) => {
+    app.delete('/inquiries', (req, res) => {
+    console.log({name: req.body.name, email: req.body.email, msg: req.body.msg})
+      db.collection('contactforms').findOneAndDelete({name: req.body.name, email: req.body.email, msg: req.body.msg}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Customer Contacted!')
       })
     })
 
-    app.delete('/rate', (req, res) => {
-      db.collection('rate').findOneAndDelete({name: req.body.name, email: req.body.email, rating: req.body.rating}, (err, result) => {
-        if (err) return res.send(500, err)
-        res.send('Rating deleted')
-      })
-    });
+   
 
     
 

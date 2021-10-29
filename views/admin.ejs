@@ -12,19 +12,30 @@
 
     <h1><span class="fa fa-sign-in"></span> Login</h1>
 
-    <table>
+    <table class="table"> <!--class table was added sinse bootstrap helps with the table style     -->
+        <thead>
+            <tr>
+    
+              <th scope="col"> Name</th>
+              <th scope="col">Emai</th>
+              <th scope="col">Message</th>
+              <th scope="col">Status</th>
+              <th scope="col">Delete</th>
+              
+            </tr>
+          </thead>
         <% for(var i=0; i < messages.length; i++) { %>
            <tr>
              <td><%= messages[i].name %></td>
              <td><%= messages[i].email %></td>
              <td><%= messages[i].msg %></td>
              <td><% if (messages[i].contacted) { %>
-                 <p class="custContacted">CHECKMARK</p>
+                 <p >✔</p>
                <% } else { %>
-                  <p class="custContacted">XMARK </p>
+                  <p class="custContacted">✘</p>
              <% } %>
             </td> 
-             <td>DELETE</td> 
+             <td class="delete">DELETE</td> <!--class Delete was added then we can add an event listener and send the delet request to the server     -->
            </tr>
         <% } %>
         </table>
@@ -35,5 +46,6 @@
 
 </div>
 </div>
+<script src="main.js"></script>
 </body>
 </html>

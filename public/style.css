@@ -8,12 +8,8 @@ body{
 #container {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: 30%, 70%;
 }
-
 #intro {
-  grid-column: 1;
   overflow:hidden;
   text-align: center;
   width: 30%;
@@ -21,9 +17,10 @@ body{
   background-color: white;
   height: 100%;
   color: #175e85;
+  z-index: 2;
 }
-
-#photo {
+/*
+#intro > .photo {
   height: 12em;
   width: 12em;
   border-radius: 50%;
@@ -31,6 +28,15 @@ body{
   background-color: #175e85;
   color: white;
 }
+*/
+
+#pfp img{
+  z-index: 3;
+  height: 13em;
+  width: 13em;
+  margin: auto;
+}
+
 
 h1 {
   font-family: 'Patua One', cursive;
@@ -45,6 +51,35 @@ h2 {
 
 
 #content {
-  grid-column: 2;
-  background-color: darkcyan;
+  width: 80%;
+  height: 60%;
+  border: 5px black solid;
+}
+
+#nav {
+  position: fixed;
+  height: 4em;
+  width: 70%;
+  background-color:#175e85;
+  top: 0;
+  right: 0;
+  font-family: 'Abel', sans-serif;
+  padding-bottom: none;
+  display: flex;
+}
+
+ul {
+  width: 100%;
+  display:flex;
+  text-align: center;
+  list-style: none;
+}
+
+ul > li{
+color: white;
+flex-direction: row;
+align-content: space-evenly;  
+font-size: 2em;
+padding: none;
+
 }
