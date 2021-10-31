@@ -6,33 +6,27 @@ body{
 }
 
 #container {
-  width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
-#layout {
+main {
   display: flex;
+  overflow: hidden;
+  width: 100%;
 }
 
 #intro {
   text-align: center;
-  width: 30%;
   height: 100%;
   padding: 3em;
   background-color: white;
   height: 100%;
   color: #175e85;
+  flex: 0 0 30%;
 }
-/*
-#intro > .photo {
-  height: 12em;
-  width: 12em;
-  border-radius: 50%;
-  display: inline-block;
-  background-color: #175e85;
-  color: white;
-}
-*/
 
 #pfp img{
   height: 13em;
@@ -40,38 +34,13 @@ body{
   margin: auto;
 }
 
-
-h1 {
-  font-family: 'Patua One', cursive;
-  font-size: 7em;
-}
-
-h2 {
-  font-family: 'Abel', sans-serif;
-  margin: 1em;
-  letter-spacing: .1em;
-}
-
-
-#content {
-  width: 50%;
-  height: 70%;
-  border: 5px black solid;
-  position: fixed;
-  right: 0;
-  display: flex;
-}
-
 #nav {
-  position: fixed;
   height: 4em;
-  width: 70%;
   background-color:#175e85;
-  top: 0;
-  right: 0;
   font-family: 'Abel', sans-serif;
   padding-bottom: none;
   display: flex;
+  width: 100%;
 }
 
 ul {
@@ -88,3 +57,34 @@ align-content: space-evenly;
 font-size: 1.5em;
 
 }
+
+h1 {
+  font-family: 'Patua One', cursive;
+  font-size: 7em;
+}
+
+h2 {
+  font-family: 'Abel', sans-serif;
+  margin: 1em;
+  letter-spacing: .1em;
+}
+
+
+#content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+
+/*
+#intro > .photo {
+  height: 12em;
+  width: 12em;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: #175e85;
+  color: white;
+}
+*/
